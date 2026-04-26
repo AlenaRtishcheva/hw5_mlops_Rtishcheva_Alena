@@ -1,0 +1,21 @@
+project: feature_repo
+# Реестр метаданных
+registry: data/registry.db
+# Провайдер остается локальным для управления, но хранилище — внешним
+provider: local
+
+# Офлайн-хранилище (откуда берем данные для обучения)
+offline_store:
+    type: file
+
+# Онлайн-хранилище (куда отдаем признаки на эндпоинт)
+online_store:
+    type: postgres
+    host: 127.0.0.1
+    port: 5433
+    database: feast_online
+    user: postgres
+    password: password 
+    sslmode: disable
+
+entity_key_serialization_version: 3
