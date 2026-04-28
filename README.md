@@ -107,29 +107,42 @@ mlflow ui --backend-store-uri sqlite:///mlflow.db
 
 ```mermaid
 graph TD
-    subgraph "Мониторинг"
-    M[MLflow: Метрики и аудит]
+    %% Слой мониторинга (Tracking Layer)
+    subgraph Tracking_Layer [СЛОЙ МОНИТОРИНГА: MLflow]
+        M[Логирование метрик и метаданных]
     end
 
-    subgraph "Хранение (DVC)"
-    V[Видео .mp4] 
-    H[Модель Haar Cascade]
+    %% Слой признаков (Feature Layer)
+    subgraph Feature_Layer [СЛОЙ ПРИЗНАКОВ: Feast]
+        F([Параметры анонимизации: pixel_size])
     end
 
-    subgraph "Обработка (Parallel OpenCV)"
-    F[Feast: Параметры pixel_size] --> W
-    V --> S{Разбивка на чанки}
-    S --> W1[Worker 1]
-    S --> W2[Worker 2]
-    S --> Wn[Worker n]
-    W1 & W2 & Wn --> J{Сборка видео}
+    %% Слой данных (Storage Layer)
+    subgraph Storage_Layer [СЛОЙ ДАННЫХ: DVC]
+        D1[(Видео .mp4)]
+        D2[(Веса Haar Cascades)]
     end
 
-    J --> Res[Результат: output.mp4]
-    J -.-> M
+    %% Слой вычислений (Processing Layer)
+    subgraph Processing_Layer [СЛОЙ ВЫЧИСЛЕНИЙ: OpenCV + Docker]
+        S{Разбиение на чанки}
+        W1[Worker 1]
+        W2[Worker 2]
+        W3[Worker N]
+        J{Сборка видео}
+    end
+
+    %% Связи между слоями
+    D1 & D2 --> S
+    F -.-> W1 & W2 & W3
+    S --> W1 & W2 & W3
+    W1 & W2 & W3 --> J
+    J --> Result[output.mp4]
+    
+    %% Связь с мониторингом
+    Result -.-> M
 ```
-
 ---
 
 ## 🏁 Итоговый вывод
-В проекте реализован полный MLOps-конвейер. Получен практический опыт работы с Docker, настройки связки PostgreSQL + Feast и автоматизации пайплайнов через DVC. Переход к инженерному подходу обеспечил стабильность и прозрачность процесса разработки ML-системы.
+В проекте реализован полный MLOps-конвейер. Получен практический опыт работы с Docker, настройки связки PostgreSQL + Feast и автоматизации пайплайнов через DVC.
