@@ -1,0 +1,24 @@
+digraph "Face Blurring ML System" {
+	graph [fontcolor="#2D3436" fontname="Sans-Serif" fontsize=15 label="Face Blurring ML System" nodesep=0.60 pad=2.0 rankdir=LR ranksep=0.75 splines=ortho]
+	node [fixedsize=true fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 height=1.4 imagescale=true labelloc=b shape=box style=rounded width=1.4]
+	edge [color="#7B8894"]
+	ce2a6fafe8634b0f94a33674b6e2c9d0 [label="Video Input
+(MP4 file)" height=2.3 image="D:\hw5_mlops_Rtishcheva_Alena\venv\Lib\site-packages\resources/programming/language\python.png" shape=none]
+	cd2ab7f1d9cb4355a77e5788dedd626b [label="Frame Splitter
+(ffmpeg)" height=2.3 image="D:\hw5_mlops_Rtishcheva_Alena\venv\Lib\site-packages\resources/programming/language\python.png" shape=none]
+	f5c6e834aea84d5aa1d181650ad14c3e [label="Worker 1
+Face Detection + Blur" height=2.3 image="D:\hw5_mlops_Rtishcheva_Alena\venv\Lib\site-packages\resources/programming/language\python.png" shape=none]
+	"66cb773e3eec49d8bbfb0cbaeabe246c" [label="Worker 2
+Face Detection + Blur" height=2.3 image="D:\hw5_mlops_Rtishcheva_Alena\venv\Lib\site-packages\resources/programming/language\python.png" shape=none]
+	"1b1e884f97f147e59563ecc931dcc4d4" [label="Worker 3
+Face Detection + Blur" height=2.3 image="D:\hw5_mlops_Rtishcheva_Alena\venv\Lib\site-packages\resources/programming/language\python.png" shape=none]
+	a900e0ea448a4d838174ca9089c2a2bf [label="Video Output
+(Blurred MP4)" height=2.3 image="D:\hw5_mlops_Rtishcheva_Alena\venv\Lib\site-packages\resources/programming/language\python.png" shape=none]
+	ce2a6fafe8634b0f94a33674b6e2c9d0 -> cd2ab7f1d9cb4355a77e5788dedd626b [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	cd2ab7f1d9cb4355a77e5788dedd626b -> f5c6e834aea84d5aa1d181650ad14c3e [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	cd2ab7f1d9cb4355a77e5788dedd626b -> "66cb773e3eec49d8bbfb0cbaeabe246c" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	cd2ab7f1d9cb4355a77e5788dedd626b -> "1b1e884f97f147e59563ecc931dcc4d4" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	f5c6e834aea84d5aa1d181650ad14c3e -> a900e0ea448a4d838174ca9089c2a2bf [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"66cb773e3eec49d8bbfb0cbaeabe246c" -> a900e0ea448a4d838174ca9089c2a2bf [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"1b1e884f97f147e59563ecc931dcc4d4" -> a900e0ea448a4d838174ca9089c2a2bf [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+}
